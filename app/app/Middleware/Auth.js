@@ -10,11 +10,10 @@ class Auth {
    * @param {Function} next
    */
   async handle ({ response, session }, next) {
-    // console.log('Auth handle', (! session.get('auth') || ! session.get('auth').status))
-    // console.log('session', session.has('auth'))
     if (! session.get('auth')) {
-      response.redirect('/login')
+      return response.redirect('/login')
     }
+
     // call next to advance the request
     await next()
   }
