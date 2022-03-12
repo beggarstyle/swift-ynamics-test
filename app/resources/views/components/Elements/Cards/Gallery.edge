@@ -1,0 +1,19 @@
+<div class="card card-with-close">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img
+        src="{{ apiUrl }}{{ item.destination }}/{{ item.filename }}-is-tablet.webp"
+      />
+    </figure>
+  </div>
+
+  @if(! hideHeader)
+    <div class="card-header">
+      <a class="has-text-black" data-id="{{ item._id }}">
+        <span class="has-text-centered">
+          <i class="fa fa-times"></i>
+        </span>
+      </a>
+    </div>
+  @endif
+</div>

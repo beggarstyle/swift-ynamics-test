@@ -1,0 +1,26 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Status</label>
+  </div>
+
+  <div class="field-body">
+    <div class="select is-width-100">
+      <select class="is-width-100" name="status" width="100">
+        <option value="">Select</option>
+        <option
+          value="true"
+          selected
+          {{ (item && item.status) ? 'selected' : '' }}
+        >
+          Active
+        </option>
+        <option
+          value="false"
+          {{ (item && !item.status && item.status === false ) ? 'selected' : '' }}
+        >
+          Inactive
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

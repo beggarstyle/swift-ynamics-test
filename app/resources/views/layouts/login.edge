@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=7">
+
+    <meta name="language" content="en-EN" />
+    <meta name="author" content="Irfan Maulana" />
+    {{ cspMeta() }}
+    <title>Benchic</title>
+
+    {{ style('style') }}
+    {{ style('css/login') }}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+      window.adonisConfig = {
+        csrfToken: '{{ csrfToken }}'
+      }
+    </script>
+
+    <style>
+      @media (min-width: 768px) {
+        .card--max-width {
+          max-width: 540px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="section section__login">
+      <div class="container">
+        <form action="auth/signin" method="post">
+          <div class="card card--max-width">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img
+                  src="https://bulma.io/images/placeholders/1280x960.png"
+                  alt="Placeholder image"
+                />
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="field">
+                <div class="control">
+                  {{ csrfField() }}
+                  <input
+                    type="text"
+                    class="input"
+                    name="email"
+                    placeholder="email"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <input
+                    type="password"
+                    class="input"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link">Login</button>
+                </div>
+                <div class="control">
+                  <button class="button is-link is-light">Clear</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

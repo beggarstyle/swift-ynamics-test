@@ -1,0 +1,153 @@
+@layout('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="/dropzone/dist/dropzone.css" />
+
+<style>
+  .card {
+    width: 280px;
+    max-width: 280px;
+    min-width: 280px;
+    height: 210px;
+  }
+
+  .card.card-with-close > .card-header > a {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border-radius: 50%;
+    height: 1.5em;
+    width: 1.5em;
+    background-color: white;
+  }
+
+  .card.card-with-close > .card-header > a > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ordering {
+    width: 100%;
+    /* background-color: gray; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .ordering .ordering__item {
+    position: relative;
+    margin-right: 1.2rem;
+    margin-bottom: 1.2rem;
+    flex-basis: 20px;
+  }
+</style>
+@endsection
+
+@section('content')
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      @!component('components.Layouts.breadcrumb', items = breadcrumb)
+    </div>
+  </div>
+
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      <button class="button">Back</button>
+    </div>
+  </div>
+
+  <form
+    id=""
+    action=""
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <input type="hidden" id="id" name="id" value="{{ id }}" />
+
+    <div class="ordering">
+      @each((item, index) in items)
+        <div
+          class="ordering__item"
+          draggable="true"
+          data-id="{{ item._id }}"
+          data-index="{{ index }}"
+        >
+          @!component('components.Elements.Cards.Gallery', item = item, apiUrl = apiUrl, hideHeader = true)
+        </div>
+      @endeach
+    </div>
+
+    <div class="columns is-12">
+      <div class="column is-12">
+        <a href="{{ route('projects.index') }}" class="button is-second">
+          <span>Back</span>
+        </a>
+      </div>
+    </div>
+
+    {{ csrfField() }}
+  </form>
+
+  <template>
+    <div class="columns is-multiline">
+      <div class="column is-3 mb-5" data-index="">
+      </div>
+    </div>
+  </template>
+@endsection
+
+@section('js')
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+  crossorigin="anonymous"
+></script>
+
+<script>
+  $( document ).ready(function() {
+    const id = document.querySelector('#id').value
+
+    const setDatasource = () => {
+      const ordering = document.querySelector('.ordering')
+      const ordering__item = ordering.querySelectorAll('.ordering__item')
+      const items = []
+      let running = 0
+
+      ordering__item.forEach((element, index) => {
+        items.push({
+          _id: element.dataset.id,
+          ordering: ++running,
+        })
+      })
+
+      return items
+    }
+
+    $( ".ordering" ).sortable({
+      appendTo: $('.ordering'),
+
+      update: async function( event, ui ) {
+        const items = await setDatasource()
+
+        const api = axios({
+          url: '/project-gallery/' + id + '/ordering',
+          method: 'post',
+          data: {
+            items: items
+          }
+        })
+        .then(response => console.log('response', response.data))
+      }
+    })
+  })
+</script>
+@endsection

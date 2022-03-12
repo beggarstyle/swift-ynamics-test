@@ -1,0 +1,64 @@
+version: "3.8"
+
+networks:
+  app:
+
+services:
+  redis:
+    image: redis:7.0-rc2
+    ports:
+      - 6379:6379
+    networks:
+      - app
+
+  db:
+    image: mongo:4.4.5
+    environment:
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    networks:
+      - app
+    volumes:
+      - ./mongo/entrypoint.sh:/entrypoint.sh
+      - ./mongo/users.json/:/users.json
+    tty: true
+
+  api:
+    container_name: swift_api
+    build:
+      context: ./api
+    ports:
+      - 3030:3000
+    networks:
+      - app
+    volumes:
+      - ./api/public/:/var/www/app/public/
+      - ./api/src/:/var/www/app/src/
+      - ./api/views/:/var/www/app/views/
+      - ./api/package.json:/var/www/app/package.json
+    #depends_on:
+    #  - db
+    #  - redis
+    tty: true
+
+  app:
+    container_name: swift_app
+    build:
+      context: ./app
+    ports:
+      - 3000:3000
+    networks:
+      - app
+    volumes:
+      - ./app/app:/var/www/app/app
+      - ./app/resources:/var/www/app/resources
+      - ./app/start:/var/www/app/start
+      - ./app/config:/var/www/app/config
+      - ./app/package.json:/var/www/app/package.json
+      - ./app/.env:/var/www/app/.env
+    tty: true
+    # depends_on:
+    #   - api

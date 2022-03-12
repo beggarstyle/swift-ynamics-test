@@ -1,0 +1,56 @@
+{
+  "name": "adonis-fullstack-app",
+  "version": "4.1.0",
+  "adonis-version": "4.1.0",
+  "description": "The fullstack application boilerplate for Adonisjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node ace test"
+  },
+  "keywords": [
+    "adonisjs",
+    "adonis-app"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@adonisjs/ace": "^5.0.8",
+    "@adonisjs/auth": "^3.0.7",
+    "@adonisjs/bodyparser": "^2.0.5",
+    "@adonisjs/cors": "^1.0.7",
+    "@adonisjs/drive": "^1.0.4",
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/framework": "^5.0.9",
+    "@adonisjs/ignitor": "^2.0.8",
+    "@adonisjs/lucid": "^6.2.1",
+    "@adonisjs/redis": "^2.1.0",
+    "@adonisjs/session": "^1.0.27",
+    "@adonisjs/shield": "^1.0.8",
+    "adonis-mix": "^1.2.0",
+    "adonis-mongodb": "^1.0.0",
+    "axios": "^0.21.1",
+    "base-64": "^1.0.0",
+    "bulma-dracula": "^1.1.1",
+    "form-data": "^4.0.0",
+    "mongodb": "^3.6.3",
+    "request": "^2.88.2",
+    "sweetalert2": "^10.15.5",
+    "utf8": "^3.0.0"
+  },
+  "devDependencies": {
+    "css-loader": "^5.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^5.0.0",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "autoload": {
+    "App": "./app"
+  }
+}

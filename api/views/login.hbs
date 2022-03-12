@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="w-screen h-screen flex justify-center items-center">
+      <div class="border rounded-lg p-2">
+        <form action="/auth/signin" method="post">
+          <div class="mb-2">
+            <label>Email: </label>
+            <input type="text" class="w-full border rounded-sm" name="email" />
+          </div>
+
+          <div class="mb-10">
+            <label>Password: </label>
+            <input type="password" class="w-full border rounded-sm" name="password" autocomplete="off" />
+          </div>
+
+          <div>
+            <button type="submit" class="w-full h-8 border rounded-sm hover:bg-green-400 hover:text-white">Submit</button>
+          </div>
+
+          <div class="flex flex-col mt-2">
+            <a href="">Forget Password</a>
+            <a href="">Sign up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

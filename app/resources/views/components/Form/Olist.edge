@@ -1,0 +1,36 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">{{ name }}</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      @each(option in item.options)
+        <p class="control mb-3">
+          <input type="text" class="input" name="aa" value="2" />
+        </p>
+      @endeach
+
+      <p class="control mb-3">
+        <input type="text" class="input" name="options[]" value="1" />
+      </p>
+
+      <p class="control mb-3">
+        <input type="text" class="input" name="options[]" value="2" />
+      </p>
+      <p class="control mb-3">
+        <input type="text" class="input" name="options[]" value="3" />
+      </p>
+    </div>
+
+    <!-- <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" placeholder="Find a repository">
+      </div>
+      <div class="control">
+        <a class="button is-info">
+          Search
+        </a>
+      </div>
+    </div> -->
+  </div>
+</div>

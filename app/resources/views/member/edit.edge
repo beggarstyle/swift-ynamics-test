@@ -1,0 +1,69 @@
+@layout('layouts.app')
+
+@section('content')
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      @!component('components.Layouts.breadcrumb', items = breadcrumb)
+    </div>
+  </div>
+
+  <form
+    id="formMember"
+    action="{{ route('members.update', { id: item._id }) }}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <button class="button is-primary">
+          <span>Submit</span>
+        </button>
+      </div>
+
+      <div class="column is-11">
+        @!component('member._form', item = item, departments = departments, locale = locale, apiUrl = apiUrl)
+      </div>
+
+      <div class="column is-12">
+        <button class="button is-primary">
+          <span>Submit</span>
+        </button>
+
+        <a href="{{ route('members.index') }}" class="button is-second">
+          <span>Back</span>
+        </a>
+      </div>
+    </div>
+
+    {{ csrfField() }}
+  </form>
+@endsection
+
+@section('js')
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        document
+          .querySelector('#target')
+          .setAttribute('src', e.target.result)
+
+        const fileName = document.querySelector('.file-name')
+
+        fileName.innerText = input.files[0].name
+      }
+
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
+
+  const imagePreview = document.querySelectorAll('.image-preview')
+  imagePreview.forEach(el => {
+    el.addEventListener('change', (event) => {
+      readURL(el)
+    })
+  })
+</script>
+@endsection

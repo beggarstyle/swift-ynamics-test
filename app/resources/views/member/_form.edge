@@ -1,0 +1,118 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label"></label>
+  </div>
+
+  <div class="field-body">
+    <div class="card">
+      <div class="card-content pa-1">
+        <figure class="image" style="max-width: 180px;">
+          <img
+            id="target"
+            src="{{ (item && item.logo) ? apiUrl + '/uploads/members/' + item._id + '/' + item.logo.filename + '-is-mobile.webp' : '/images/profile.jpg' }}"
+          />
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Logo</label>
+  </div>
+
+  <div class="field-body">
+    <div class="file is-width-100 is-light has-name">
+      <label class="file-label is-width-100">
+        <input
+          type="file"
+          id="file"
+          class="file-input image-preview"
+          name="file"
+          {{ logoRequired ? 'required' : '' }}
+        />
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+
+        <span class="file-name is-width-100"></span>
+      </label>
+    </div>
+  </div>
+</div>
+
+@each(lange in locale)
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Name {{ lange.title }}</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control">
+          <input
+            type="text"
+            class="input"
+            name="lange[{{ lange.prefix }}]"
+            value="{{ (item && item.lange[lange.prefix]) ? item.lange[lange.prefix] : '' }}"
+          />
+        </p>
+      </div>
+    </div>
+  </div>
+@endeach
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Departments</label>
+  </div>
+
+  <div class="field-body">
+    <div class="select is-width-100">
+      <select class="is-width-100" name="department_id">
+        <option value="">Select</option>
+        @each(department in departments)
+          <option
+            value="{{ department._id.toString() }}"
+            {{ (item && item.department_id === department._id) ? 'selected' : '' }}
+          >
+            {{ department.lange['en'] }}
+          </option>
+        @endeach
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Status</label>
+  </div>
+
+  <div class="field-body">
+    <div class="select is-width-100">
+      <select class="is-width-100" name="status" width="100">
+        <option value="">Select</option>
+        <option
+          value="true"
+          {{ (item && item.status) ? 'selected' : '' }}
+        >
+          Active
+        </option>
+        <option
+          value="false"
+          {{ (item && !item.status && item.status === false ) ? 'selected' : '' }}
+        >
+          Inactive
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+

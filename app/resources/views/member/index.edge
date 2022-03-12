@@ -1,0 +1,105 @@
+@layout('layouts.app')
+
+@section('content')
+  <div class="columns is-multiline">
+    <div class="column is-12">
+      @!component('components.Layouts.breadcrumb', items = breadcrumb)
+    </div>
+  </div>
+
+  @if(flashMessage('notification'))
+    @!component('components.Elements.Notification', item = flashMessage('notification'))
+  @endif
+
+  <div class="columns is-multiline">
+    <div class="column">
+      <a
+        href="{{ route('members.create') }}"
+        class="button is-primary"
+      >
+        <span>Add New Data</span>
+      </a>
+
+      <table class="table is-bordered is-striped is-narrow is-fullwidth mt-4">
+        <thead>
+          <tr>
+            <th class=""></th>
+            <th class="">Name</th>
+            <th class="">Departments</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @each((item, index) in items)
+            <tr>
+              <td class="has-text-centered" width="60">{{ index }}</td>
+              <td>{{ item.lange['en'] }}</td>
+              <td class="has-text-left" width="20%">
+                {{ item.departments[0].lange['en'] }}
+              </td>
+              <td class="has-text-centered" width="120">
+                {{ item.status ? 'Active' : 'Inactive' }}
+              </td>
+              <td class="has-text-centered" width="80">
+                <a href="{{ route('members.edit', { id: item._id.toString() }) }}">
+                  <span class="icon is-small">
+                    <i class="fa fa-edit"></i>
+                  </span>
+                </a>
+
+                <a
+                  class="is-delete is-danger"
+                  data-id="{{ item._id }}"
+                  data-module="members"
+                >
+                  <span class="icon is-small">
+                    <i class="fa fa-trash-o"></i>
+                  </span>
+                </a>
+              </td>
+            </tr>
+          @endeach
+        </tbody>
+      </table>
+
+      @!component('components.Elements.Paginate')
+    </div>
+  </div>
+@endsection
+
+@section('js')
+<script>
+  const fnDelete = {
+    swalConfirm: (el) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/' + el.dataset.module + '/' + el.dataset.id + '/delete'
+        }
+      })
+    },
+
+    init: () => {
+      const btnDelete = document.querySelectorAll('.is-delete')
+
+      btnDelete.forEach(btn => {
+        btn.addEventListener('click', event => {
+          fnDelete.swalConfirm(event.target.closest('a'))
+        })
+      })
+    }
+  }
+
+  fnDelete.init()
+</script>
+@endsection

@@ -1,0 +1,22 @@
+<div class="columns">
+  <div class="column is-12">
+    <div class="notification {{ item.classes }}">
+      <button class="delete"></button>
+      {{ item.messages }}
+    </div>
+  </div>
+</div>
+
+<script>
+  const notification = {
+    elemnet: document.querySelector('.notification'),
+
+    init: () => {
+      setTimeout(() => {
+        notification.elemnet.closest('.columns').remove()
+      }, 4000);
+    }
+  }
+
+  notification.init()
+</script>

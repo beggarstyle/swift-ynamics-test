@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=7">
+
+    <meta name="language" content="en-EN" />
+    <meta name="author" content="Irfan Maulana" />
+    {{ cspMeta() }}
+    <title>Benchic</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {{ style('style') }}
+    {{--  {{ style('/assets/css/app') }}  --}}
+
+    @!section('css')
+
+    <script>
+      window.adonisConfig = {
+        csrfToken: '{{ csrfToken }}'
+      }
+    </script>
+  </head>
+
+  <body>
+    @include('components.Layouts.header')
+
+    <div class="wrapper">
+      <div class="columns">
+        @include('components.Layouts.aside')
+
+        <main class="column main">
+          @!section('content')
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    @!section('js')
+  </body>
+</html>

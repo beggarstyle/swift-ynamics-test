@@ -1,0 +1,17 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">{{ name }}</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control">
+        <textarea
+          class="textarea"
+          name="{{ index }}"
+          cols="30"
+          rows="5"
+        >{{ (item && item[index]) ? item[index] : '' }}</textarea>
+      </p>
+    </div>
+  </div>
+</div>

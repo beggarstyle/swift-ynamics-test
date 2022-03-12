@@ -1,0 +1,19 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">{{ name }}</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control">
+        <input
+          type="text"
+          class="input"
+          name="{{ index }}"
+          value="{{ (item && item[index]) ? item[index] : '' }}"
+          {{ required ? required : '' }}
+          autocomplete="off"
+        />
+      </p>
+    </div>
+  </div>
+</div>
