@@ -39,7 +39,7 @@ services:
       - ./api/src/:/var/www/app/src/
       - ./api/views/:/var/www/app/views/
       - ./api/package.json:/var/www/app/package.json
-    #depends_on:
+    # depends_on:
     #  - db
     #  - redis
     tty: true

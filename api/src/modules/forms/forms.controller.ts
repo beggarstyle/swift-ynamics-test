@@ -22,8 +22,8 @@ export class FormsController {
 
     if (sendMail) {
       this.mailService.sendUsersConfirmation({
-        to: 'beggar.style@gmail.com',
-        subject: 'Testing Nest MailerModule',
+        to: 'napat.s@swiftdynamics.co.th',
+        subject: 'Confirm Approved',
         template: 'confirmation'
       })
     }

@@ -1,7 +1,6 @@
 'use strict'
 
 const Axios = use('axios')
-// const bcrypt = require('bcrypt');
 const crypto = require("crypto");
 const Env = use('Env');
 
@@ -23,8 +22,6 @@ class AuthController {
     const cipher = await crypto.createCipheriv(process.env.CRYPTO_ALGORITHM, process.env.CRYPTO_KEY, process.env.CRYPTO_IV);
     let encryptedData = await cipher.update(request.input('password'), 'utf-8', 'hex');
     encryptedData += await cipher.final('hex');
-
-    // console.log('encryptedData', encryptedData)
 
     const api = await Axios({
       method: 'post',
