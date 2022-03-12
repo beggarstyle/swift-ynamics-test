@@ -14,7 +14,7 @@ import { MailController } from './mail.controller';
         secure: false,
         auth: {
           user: 'host.ploysriphai@gmail.com',
-          pass: '1Father2Son',
+          pass: 'S3curityGuar6',
         },
       },
       template: {
